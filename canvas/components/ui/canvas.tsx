@@ -41,7 +41,7 @@ interface ConfigType {
 // Global variables with proper typing
 let ctx: CanvasContext;
 let wave: Wave;
-let pos: Position = { x: 0, y: 0 };
+const pos: Position = { x: 0, y: 0 };
 let lines: Line[] = [];
 const config: ConfigType = {
   debug: true,
