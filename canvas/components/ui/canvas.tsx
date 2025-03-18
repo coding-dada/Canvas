@@ -64,7 +64,7 @@ Line.prototype = {
     // @ts-expect-error: e might be undefined, but init handles it internally
     for (let n, i = 0, a = this.nodes.length; i < a; i++)
       // @ts-expect-error: e might be undefined, but init handles it internally
-      (t = this.nodes[i]),
+      t = this.nodes[i],
         0 < i &&
           // @ts-expect-error: e might be undefined, but init handles it internally
           ((n = this.nodes[i - 1]),
