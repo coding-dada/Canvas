@@ -1,24 +1,24 @@
 function n(e) {
-  // @ts-ignore
+  // @ts-expect-error
   this.init(e || {});
 }
 n.prototype = {
-  // @ts-ignore
+  // @ts-expect-error
   init: function (e) {
-    // @ts-ignore
+    // @ts-expect-error
     this.phase = e.phase || 0;
-    // @ts-ignore
+    // @ts-expect-error
     this.offset = e.offset || 0;
-    // @ts-ignore
+    // @ts-expect-error
     this.frequency = e.frequency || 0.001;
-    // @ts-ignore
+    // @ts-expect-error
     this.amplitude = e.amplitude || 1;
   },
   update: function () {
     return (
-      // @ts-ignore
+      // @ts-expect-error
       (this.phase += this.frequency),
-      // @ts-ignore
+      // @ts-expect-error
       (e = this.offset + Math.sin(this.phase) * this.amplitude)
     );
   },
@@ -27,54 +27,54 @@ n.prototype = {
   },
 };
 
-// @ts-ignore
+// @ts-expect-error
 function Line(e) {
-  // @ts-ignore
+  // @ts-expect-error
   this.init(e || {});
 }
 
 Line.prototype = {
-  // @ts-ignore
+  // @ts-expect-error
   init: function (e) {
-    // @ts-ignore
+    // @ts-expect-error
     this.spring = e.spring + 0.1 * Math.random() - 0.05;
-    // @ts-ignore
+    // @ts-expect-error
     this.friction = E.friction + 0.01 * Math.random() - 0.005;
-    // @ts-ignore
+    // @ts-expect-error
     this.nodes = [];
-    for (var t, n = 0; n < E.size; n++) {
+    for (let t, n = 0; n < E.size; n++) {
       t = new Node();
-      // @ts-ignore
+      // @ts-expect-error
       t.x = pos.x;
-      // @ts-ignore
+      // @ts-expect-error
       t.y = pos.y;
-      // @ts-ignore
+      // @ts-expect-error
       this.nodes.push(t);
     }
   },
   update: function () {
-    // @ts-ignore
+    // @ts-expect-error
     let e = this.spring,
-      // @ts-ignore
+      // @ts-expect-error
       t = this.nodes[0];
-    // @ts-ignore
+    // @ts-expect-error
     t.vx += (pos.x - t.x) * e;
-    // @ts-ignore
+    // @ts-expect-error
     t.vy += (pos.y - t.y) * e;
-    // @ts-ignore
-    for (var n, i = 0, a = this.nodes.length; i < a; i++)
-      // @ts-ignore
+    // @ts-expect-error
+    for (let n, i = 0, a = this.nodes.length; i < a; i++)
+      // @ts-expect-error
       (t = this.nodes[i]),
         0 < i &&
-          // @ts-ignore
+          // @ts-expect-error
           ((n = this.nodes[i - 1]),
           (t.vx += (n.x - t.x) * e),
           (t.vy += (n.y - t.y) * e),
           (t.vx += n.vx * E.dampening),
           (t.vy += n.vy * E.dampening)),
-        // @ts-ignore
+        // @ts-expect-error
         (t.vx *= this.friction),
-        // @ts-ignore
+        // @ts-expect-error
         (t.vy *= this.friction),
         (t.x += t.vx),
         (t.y += t.vy),
@@ -83,57 +83,57 @@ Line.prototype = {
   draw: function () {
     let e,
       t,
-      // @ts-ignore
+      // @ts-expect-error
       n = this.nodes[0].x,
-      // @ts-ignore
+      // @ts-expect-error
       i = this.nodes[0].y;
-    // @ts-ignore
+    // @ts-expect-error
     ctx.beginPath();
-    // @ts-ignore
+    // @ts-expect-error
     ctx.moveTo(n, i);
-    // @ts-ignore
-    for (var a = 1, o = this.nodes.length - 2; a < o; a++) {
-      // @ts-ignore
+    // @ts-expect-error
+    for (let a = 1, o = this.nodes.length - 2; a < o; a++) {
+      // @ts-expect-error
       e = this.nodes[a];
-      // @ts-ignore
+      // @ts-expect-error
       t = this.nodes[a + 1];
       n = 0.5 * (e.x + t.x);
       i = 0.5 * (e.y + t.y);
-      // @ts-ignore
+      // @ts-expect-error
       ctx.quadraticCurveTo(e.x, e.y, n, i);
     }
-    // @ts-ignore
+    // @ts-expect-error
     e = this.nodes[a];
-    // @ts-ignore
+    // @ts-expect-error
     t = this.nodes[a + 1];
-    // @ts-ignore
+    // @ts-expect-error
     ctx.quadraticCurveTo(e.x, e.y, t.x, t.y);
-    // @ts-ignore
+    // @ts-expect-error
     ctx.stroke();
-    // @ts-ignore
+    // @ts-expect-error
     ctx.closePath();
   },
 };
 
-// @ts-ignore
+// @ts-expect-error
 function onMousemove(e) {
   function o() {
     lines = [];
     for (let e = 0; e < E.trails; e++)
       lines.push(new Line({ spring: 0.45 + (e / E.trails) * 0.025 }));
   }
-  // @ts-ignore
+  // @ts-expect-error
   function c(e) {
     e.touches
-      ? // @ts-ignore
+      ? // @ts-expect-error
         ((pos.x = e.touches[0].pageX), (pos.y = e.touches[0].pageY))
-      : // @ts-ignore
+      : // @ts-expect-error
         ((pos.x = e.clientX), (pos.y = e.clientY)),
       e.preventDefault();
   }
-  // @ts-ignore
+  // @ts-expect-error
   function l(e) {
-    // @ts-ignore
+    // @ts-expect-error
     1 == e.touches.length &&
       ((pos.x = e.touches[0].pageX), (pos.y = e.touches[0].pageY));
   }
@@ -148,43 +148,43 @@ function onMousemove(e) {
 }
 
 function render() {
-  // @ts-ignore
+  // @ts-expect-error
   if (ctx.running) {
-    // @ts-ignore
+    // @ts-expect-error
     ctx.globalCompositeOperation = "source-over";
-    // @ts-ignore
+    // @ts-expect-error
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    // @ts-ignore
+    // @ts-expect-error
     ctx.globalCompositeOperation = "lighter";
-    // @ts-ignore
+    // @ts-expect-error
     ctx.strokeStyle = "hsla(" + Math.round(f.update()) + ",100%,50%,0.025)";
-    // @ts-ignore
+    // @ts-expect-error
     ctx.lineWidth = 10;
-    for (var e, t = 0; t < E.trails; t++) {
-      // @ts-ignore
+    for (let e, t = 0; t < E.trails; t++) {
+      // @ts-expect-error
       (e = lines[t]).update();
       e.draw();
     }
-    // @ts-ignore
+    // @ts-expect-error
     ctx.frame++;
     window.requestAnimationFrame(render);
   }
 }
 
 function resizeCanvas() {
-  // @ts-ignore
+  // @ts-expect-error
   ctx.canvas.width = window.innerWidth - 20;
-  // @ts-ignore
+  // @ts-expect-error
   ctx.canvas.height = window.innerHeight;
 }
 
-// @ts-ignore
-var ctx,
-  // @ts-ignore
+// @ts-expect-error
+let ctx,
+  // @ts-expect-error
   f,
   e = 0,
   pos = {},
-  // @ts-ignore
+  // @ts-expect-error
   lines = [],
   E = {
     debug: true,
@@ -202,7 +202,7 @@ function Node() {
 }
 
 export const renderCanvas = function () {
-  // @ts-ignore
+  // @ts-expect-error
   ctx = document.getElementById("canvas").getContext("2d");
   ctx.running = true;
   ctx.frame = 1;
@@ -217,15 +217,15 @@ export const renderCanvas = function () {
   document.body.addEventListener("orientationchange", resizeCanvas);
   window.addEventListener("resize", resizeCanvas);
   window.addEventListener("focus", () => {
-    // @ts-ignore
+    // @ts-expect-error
     if (!ctx.running) {
-      // @ts-ignore
+      // @ts-expect-error
       ctx.running = true;
       render();
     }
   });
   window.addEventListener("blur", () => {
-    // @ts-ignore
+    // @ts-expect-error
     ctx.running = true;
   });
   resizeCanvas();
