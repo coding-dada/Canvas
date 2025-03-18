@@ -183,7 +183,6 @@ let ctx,
   // @ts-expect-error: e might be undefined, but init handles it internally
   f,
   e = 0,
-  pos = {},
   // @ts-expect-error: e might be undefined, but init handles it internally
   lines = []
   const E = {
